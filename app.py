@@ -70,6 +70,8 @@ def main():
         with get_openai_callback() as cb: 
           response = chain.run(input_documents=docs, question=query)
           print(cb)
+
+          #test
         st.write(response)
 
 
