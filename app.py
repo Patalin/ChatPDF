@@ -18,6 +18,7 @@ with st.sidebar:
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
+            header {visibility: hidden;}
             </style>
             """
     st.markdown(hide_streamlit_style, 
