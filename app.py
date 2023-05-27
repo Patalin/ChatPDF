@@ -14,11 +14,16 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 # Sidebar contents
 with st.sidebar:
+    hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            </style>
+            """
+    st.markdown(hide_streamlit_style, 
+                unsafe_allow_html=True,) 
     st.title('ChatPDF App')
-    st.markdown(''' 
-    ## About
-    Chat with any PDF file.
-    ''')
+    
     add_vertical_space(1)
 
     # Let users input their OpenAI key
@@ -64,7 +69,7 @@ def main():
       
       if query:  
         docs = VectorStore.similarity_search(query=query, k=3)
-        llm = ChatOpenAI(model_name="gpt-3.5-turbo")
+        llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.8)
         chain = load_qa_chain(llm=llm, chain_type="stuff")
         with get_openai_callback() as cb: 
           response = chain.run(input_documents=docs, question=query)
